@@ -21,6 +21,7 @@
 		DECEE25B25524441005F387A /* UIViewController+PageSlide.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEE25A25524441005F387A /* UIViewController+PageSlide.swift */; };
 		DECEE25E2552611E005F387A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEE25C2552611E005F387A /* PageViewController.swift */; };
 		DECEE25F2552611E005F387A /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECEE25D2552611E005F387A /* PageViewController.xib */; };
+		DECEE26325527F2A005F387A /* PageSlideController+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEE26225527F2A005F387A /* PageSlideController+Extenstion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -40,6 +41,7 @@
 		DECEE25A25524441005F387A /* UIViewController+PageSlide.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+PageSlide.swift"; sourceTree = "<group>"; };
 		DECEE25C2552611E005F387A /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		DECEE25D2552611E005F387A /* PageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
+		DECEE26225527F2A005F387A /* PageSlideController+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageSlideController+Extenstion.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +64,7 @@
 				DE4BE29725512CE000ED4C98 /* PageSlideBarItem.swift */,
 				DE4BE29D2551316400ED4C98 /* PageSlideContentView.swift */,
 				DE4BE29925512D1900ED4C98 /* PageSlideController.swift */,
+				DECEE26225527F2A005F387A /* PageSlideController+Extenstion.swift */,
 				DECEE25A25524441005F387A /* UIViewController+PageSlide.swift */,
 			);
 			path = PageSlideController;
@@ -177,6 +180,7 @@
 				DE4BE29A25512D1900ED4C98 /* PageSlideController.swift in Sources */,
 				DE4BE29825512CE000ED4C98 /* PageSlideBarItem.swift in Sources */,
 				DE4BE29625512CAE00ED4C98 /* PageSlideBarButton.swift in Sources */,
+				DECEE26325527F2A005F387A /* PageSlideController+Extenstion.swift in Sources */,
 				DEAADBBC2549C5BC001BA378 /* ViewController.swift in Sources */,
 				DE4BE29225512C0A00ED4C98 /* PageSlideScrollView.swift in Sources */,
 				DECEE25B25524441005F387A /* UIViewController+PageSlide.swift in Sources */,

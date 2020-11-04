@@ -27,6 +27,8 @@ public class PageSlideContentView: UIScrollView, UIGestureRecognizerDelegate {
                     } else {
                         self.panGestureRecognizer.isEnabled = true
                     }
+                } else {
+                    self.panGestureRecognizer.isEnabled = true
                 }
             }
             super.contentOffset = offset
