@@ -92,14 +92,11 @@ public class PageSlideBar: UIView {
     
     public var titleFont: UIFont? {
         didSet {
-            if self.scrollView == nil {
-                return
-            }
-            
             for view in self.scrollView.subviews {
-                let button = view as! PageSlideBarButton
-                if !button.isSelected || self.selectedTitleFont == nil {
-                    button.titleLabel?.font = titleFont
+                if let button = view as? PageSlideBarButton {
+                    if button.isSelected || self.selectedTitleFont == nil {
+                        button.titleLabel?.font = titleFont
+                    }
                 }
             }
         }
@@ -148,8 +145,6 @@ public class PageSlideBar: UIView {
     }
     
     private func commonInit() {
-        self.titleFont = PageSlideBarTitleFont
-        self.tintColor = PageSlideBarTintColor
         self.backgroundColor = UIColor.white
         
         if self.scrollView == nil {
@@ -184,6 +179,9 @@ public class PageSlideBar: UIView {
         self.scrollView.addSubview(self.indicatorView)
         
         self.setupLayoutConstraints()
+        
+        self.titleFont = PageSlideBarTitleFont
+        self.tintColor = PageSlideBarTintColor
     }
     
     private func setupLayoutConstraints() {
