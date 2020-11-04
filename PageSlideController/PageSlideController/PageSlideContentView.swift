@@ -8,6 +8,12 @@
 
 import UIKit
 
+@objc
+public protocol PageSlideContentViewDelegate {
+    @objc
+    optional var scrollView: UIScrollView? { get }
+}
+
 public class PageSlideContentView: UIScrollView, UIGestureRecognizerDelegate {
     
     @IBInspectable

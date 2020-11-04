@@ -20,7 +20,7 @@ extension PageSlideController {
         if topLayoutInset == 0.0 {
             topLayoutInset = UIApplication.shared.statusBarFrame.size.height
         }
-        if let navigationController = self.navigationController {
+        if let navigationController = navigationController {
             topLayoutInset += navigationController.navigationBar.frame.size.height
         }
         return topLayoutInset
@@ -33,7 +33,7 @@ extension PageSlideController {
         } else {
             bottomLayoutInset = bottomLayoutGuide.length
         }
-        if let tabBarController = self.tabBarController {
+        if let tabBarController = tabBarController {
             bottomLayoutInset += tabBarController.tabBar.frame.size.height
         }
         return bottomLayoutInset

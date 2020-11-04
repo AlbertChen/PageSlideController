@@ -8,9 +8,13 @@
 
 import UIKit
 
-class PageViewController: UIViewController, UITableViewDataSource {
+class PageViewController: UIViewController, UITableViewDataSource, PageSlideContentViewDelegate {
     
     @IBOutlet weak var tableView: UITableView!
+    
+    var scrollView: UIScrollView? {
+        return self.tableView
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
