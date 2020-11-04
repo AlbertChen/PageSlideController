@@ -24,13 +24,13 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
         set {
             _viewControllers = newValue
             
-            self.updateSubviews()
+            self.updateContentSubviews()
             var selectedIndex = self.selectedIndex
             let count = newValue?.count ?? 0
             if selectedIndex > count {
                 selectedIndex = 0
             }
-            self.updateSubviews(selectedIndex: selectedIndex, changeOffset: true)
+            self.updateContentSubviews(selectedIndex: selectedIndex, changeOffset: true)
         }
     }
     
@@ -60,9 +60,23 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
             _selectedIndex = newValue
             
             if self.pageSlideBar.items != nil && self.pageSlideBar.items!.count > 0 {
-                self.updateSubviews(selectedIndex: newValue, changeOffset: true)
+                self.updateContentSubviews(selectedIndex: newValue, changeOffset: true)
             }
         }
+    }
+    
+    @IBOutlet
+    public var scrollView: PageSlideScrollView!
+    
+    @IBOutlet
+    public var headerView: UIView!
+    
+    public var headerStickyHeight: CGFloat {
+        var headerHeight: CGFloat = 0.0
+        if self.headerView != nil {
+            headerHeight = self.headerView.frame.height.rounded(.up)
+        }
+        return headerHeight
     }
     
     @IBOutlet
@@ -115,6 +129,28 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
 
     open override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if self.scrollView == nil {
+            let scrollView = PageSlideScrollView(frame: self.view.bounds)
+            scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+            scrollView.showsVerticalScrollIndicator = false
+            scrollView.showsHorizontalScrollIndicator = false
+            scrollView.alwaysBounceVertical = true
+            
+            self.scrollView = scrollView
+            self.view.addSubview(scrollView)
+        }
+        
+        var offsetY: CGFloat = 0.0
+        if self.headerView != nil {
+            var frame = self.headerView.frame
+            frame.origin.x = 0.0
+            frame.origin.y = 0.0
+            self.headerView.frame = frame
+            
+            self.scrollView.addSubview(self.headerView)
+            offsetY += frame.size.height
+        }
 
         if self.pageSlideBar == nil {
             let pageSlideBar = PageSlideBar(layoutStyle: self.pageSlideBarLayoutStyle)
@@ -123,38 +159,46 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
             pageSlideBar.delegate = self
             
             var frame = pageSlideBar.frame
+            frame.origin.y = offsetY
             frame.size.width = self.view.frame.size.width
             frame.size.height = self.pageSlideBarHeight
             pageSlideBar.frame = frame
             
             self.pageSlideBar = pageSlideBar
-            self.view.addSubview(pageSlideBar)
+            self.scrollView.addSubview(pageSlideBar)
+            
+            offsetY += frame.size.height
         }
         
         if self.contentView == nil {
-            let scrollView = PageSlideContentView(frame: .zero)
-            scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            scrollView.showsVerticalScrollIndicator = false;
-            scrollView.showsHorizontalScrollIndicator = false;
-            scrollView.alwaysBounceVertical = false;
-            scrollView.isPagingEnabled = true;
-            scrollView.delegate = self;
+            let contentView = PageSlideContentView(frame: .zero)
+            contentView.showsVerticalScrollIndicator = false
+            contentView.showsHorizontalScrollIndicator = false
+            contentView.alwaysBounceVertical = false
+            contentView.isPagingEnabled = true
+            contentView.delegate = self
             
-            var frame = scrollView.frame
-            frame.origin.y = self.pageSlideBarHeight
-            frame.size.width = self.view.frame.size.width
-            frame.size.height = self.view.frame.size.height - self.pageSlideBarHeight
-            scrollView.frame = frame
+            var frame = contentView.frame
+            frame.origin.y = offsetY
+            frame.size.width = UIScreen.main.bounds.size.width
+            frame.size.height = UIScreen.main.bounds.size.height - self.pageSlideBarHeight - topLayoutInset - bottomLayoutInset
+            contentView.frame = frame
             
-            self.contentView = scrollView
-            self.view.addSubview(scrollView)
+            self.contentView = contentView
+            self.scrollView.addSubview(contentView)
+            
+            offsetY += frame.size.height
         }
         
-        self.updateSubviews()
-        self.updateSubviews(selectedIndex: self.selectedIndex, changeOffset: true)
+        var contentSize = self.scrollView.contentSize
+        contentSize.height = offsetY
+        self.scrollView.contentSize = contentSize
+        
+        self.updateContentSubviews()
+        self.updateContentSubviews(selectedIndex: self.selectedIndex, changeOffset: true)
     }
     
-    private func updateSubviews() {
+    private func updateContentSubviews() {
         if self.contentView == nil {
             return
         }
@@ -177,7 +221,7 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
             barItems.append(viewController.pageSlideBarItem!)
             
             var frame = self.contentView.bounds
-            frame.origin.x = CGFloat(i) * self.view.frame.size.width
+            frame.origin.x = CGFloat(i) * self.contentView.frame.size.width
             viewController.view.frame = frame
             viewController.view.autoresizingMask = [.flexibleWidth, .flexibleHeight]
             self.contentView.addSubview(viewController.view)
@@ -187,11 +231,20 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
         
         self.pageSlideBar.items = barItems
         var contentSize = self.contentView.contentSize
-        contentSize.width = self.view.frame.size.width * CGFloat(controllerCount)
+        contentSize.width = self.contentView.frame.size.width * CGFloat(controllerCount)
         self.contentView.contentSize = contentSize
+        
+        var gestureRecognizers: [UIGestureRecognizer] = []
+        if let scrollGestureRecognizers = self.pageSlideBar.scrollView.gestureRecognizers {
+            gestureRecognizers.append(contentsOf: scrollGestureRecognizers)
+        }
+        if let scrollGestureRecognizers = self.contentView.gestureRecognizers {
+            gestureRecognizers.append(contentsOf: scrollGestureRecognizers)
+        }
+        self.scrollView.otherGestureRecognizers = gestureRecognizers
     }
     
-    public func updateSubviews(selectedIndex: Int, changeOffset: Bool) {
+    public func updateContentSubviews(selectedIndex: Int, changeOffset: Bool) {
         let count = self.viewControllers?.count ?? 0
         if selectedIndex < 0 || selectedIndex >= count {
             return
@@ -216,8 +269,8 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
         
         if changeOffset {
             var contentOffset = self.contentView.contentOffset
-            if contentOffset.x != CGFloat(selectedIndex) * self.view.frame.size.width {
-                contentOffset.x = CGFloat(selectedIndex) * self.view.frame.size.width
+            if contentOffset.x != CGFloat(selectedIndex) * self.contentView.frame.size.width {
+                contentOffset.x = CGFloat(selectedIndex) * self.contentView.frame.size.width
                 self.contentView.setContentOffset(contentOffset, animated: true)
             }
         }
@@ -233,7 +286,7 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
         let indexF = scrollView.contentOffset.x / scrollView.frame.size.width
         let index = Int(indexF)
         if fabsf(Float(indexF - CGFloat(index))) <= 0.1 {
-            self.updateSubviews(selectedIndex: index, changeOffset: false)
+            self.updateContentSubviews(selectedIndex: index, changeOffset: false)
         }
     }
     
@@ -241,7 +294,7 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
     
     public func pageSlideBar(_ slideBar: PageSlideBar, didSelectItem item: PageSlideBarItem) {
         let index = self.pageSlideBar.items?.firstIndex(of: item) ?? 0
-        self.updateSubviews(selectedIndex: index, changeOffset: true)
+        self.updateContentSubviews(selectedIndex: index, changeOffset: true)
     }
 
 }

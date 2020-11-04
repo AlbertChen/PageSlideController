@@ -34,6 +34,11 @@ class ViewController: UIViewController {
         
         let slideControlelr = PageSlideController(viewControllers: viewControllers, barLayoutStyle: style)
         slideControlelr.title = "Page Slide Controller"
+        
+        let imageView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.main.bounds.size.width, height: 150.0))
+        imageView.image = UIImage(named: "img")
+        slideControlelr.headerView = imageView
+        
         let navController = UINavigationController(rootViewController: slideControlelr)
         navController.navigationBar.isTranslucent = false
         navController.modalPresentationStyle = .fullScreen

@@ -31,4 +31,25 @@ extension UIViewController {
         return pageSlideController
     }
     
+//    public func scrollToTopIfNeed() {
+//        let scrollView = self.scrollViewInView(self.view)
+//        scrollView?.setContentOffset(.zero, animated: true)
+//    }
+//
+//    private func scrollViewInView(_ view: UIView) -> UIScrollView? {
+//        if view is UIScrollView {
+//            return view as? UIScrollView
+//        }
+//
+//        for subview in view.subviews {
+//            if subview is UIScrollView {
+//                return subview as? UIScrollView
+//            } else {
+//                return self.scrollViewInView(subview)
+//            }
+//        }
+//
+//        return nil
+//    }
+    
 }

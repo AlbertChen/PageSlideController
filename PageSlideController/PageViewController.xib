@@ -10,7 +10,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PageViewController" customModule="PageSlideController" customModuleProvider="target">
             <connections>
-                <outlet property="label" destination="xMA-xB-YZ6" id="JdU-sk-6gg"/>
+                <outlet property="tableView" destination="qdL-da-LYN" id="ayY-gH-N1s"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -19,26 +19,29 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xMA-xB-YZ6">
-                    <rect key="frame" x="186" y="397" width="42" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <nil key="textColor"/>
-                    <nil key="highlightedColor"/>
-                </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7YQ-fj-OEy">
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="qdL-da-LYN">
+                    <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                    <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
+                    <connections>
+                        <outlet property="dataSource" destination="-1" id="SAo-aX-XSn"/>
+                    </connections>
+                </tableView>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nf6-AK-a0N">
                     <rect key="frame" x="180" y="433" width="54" height="30"/>
                     <state key="normal" title="Dismiss"/>
                     <connections>
-                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="9Bi-HK-2d4"/>
+                        <action selector="buttonPressed:" destination="-1" eventType="touchUpInside" id="Esg-Ul-6FS"/>
                     </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
             <constraints>
-                <constraint firstItem="7YQ-fj-OEy" firstAttribute="top" secondItem="xMA-xB-YZ6" secondAttribute="bottom" constant="15" id="A1n-NW-q7a"/>
-                <constraint firstItem="xMA-xB-YZ6" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="FlF-Xz-Drt"/>
-                <constraint firstItem="7YQ-fj-OEy" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="OqW-1J-onG"/>
-                <constraint firstItem="7YQ-fj-OEy" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="VJc-5z-wKi"/>
+                <constraint firstItem="nf6-AK-a0N" firstAttribute="centerY" secondItem="i5M-Pr-FkT" secondAttribute="centerY" id="Afx-Kn-amd"/>
+                <constraint firstItem="qdL-da-LYN" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="CWT-De-NHd"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="qdL-da-LYN" secondAttribute="bottom" id="h3H-RZ-ZpO"/>
+                <constraint firstItem="qdL-da-LYN" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="rl3-wB-GkS"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="qdL-da-LYN" secondAttribute="trailing" id="wHU-af-VU9"/>
+                <constraint firstItem="nf6-AK-a0N" firstAttribute="centerX" secondItem="i5M-Pr-FkT" secondAttribute="centerX" id="zfT-kG-QPF"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="139" y="142"/>

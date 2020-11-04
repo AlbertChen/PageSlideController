@@ -22,6 +22,8 @@
 		DECEE25E2552611E005F387A /* PageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEE25C2552611E005F387A /* PageViewController.swift */; };
 		DECEE25F2552611E005F387A /* PageViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECEE25D2552611E005F387A /* PageViewController.xib */; };
 		DECEE26325527F2A005F387A /* PageSlideController+Extenstion.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEE26225527F2A005F387A /* PageSlideController+Extenstion.swift */; };
+		DECEE26625529C84005F387A /* PageTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DECEE26425529C84005F387A /* PageTableViewCell.swift */; };
+		DECEE26725529C84005F387A /* PageTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DECEE26525529C84005F387A /* PageTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -42,6 +44,8 @@
 		DECEE25C2552611E005F387A /* PageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageViewController.swift; sourceTree = "<group>"; };
 		DECEE25D2552611E005F387A /* PageViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageViewController.xib; sourceTree = "<group>"; };
 		DECEE26225527F2A005F387A /* PageSlideController+Extenstion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PageSlideController+Extenstion.swift"; sourceTree = "<group>"; };
+		DECEE26425529C84005F387A /* PageTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageTableViewCell.swift; sourceTree = "<group>"; };
+		DECEE26525529C84005F387A /* PageTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PageTableViewCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -95,6 +99,8 @@
 				DEAADBCB2549C775001BA378 /* ViewController.xib */,
 				DECEE25C2552611E005F387A /* PageViewController.swift */,
 				DECEE25D2552611E005F387A /* PageViewController.xib */,
+				DECEE26425529C84005F387A /* PageTableViewCell.swift */,
+				DECEE26525529C84005F387A /* PageTableViewCell.xib */,
 				DEAADBC02549C5BD001BA378 /* Assets.xcassets */,
 				DEAADBCD2549C8FD001BA378 /* LaunchScreen.xib */,
 				DEAADBC52549C5BD001BA378 /* Info.plist */,
@@ -162,6 +168,7 @@
 			files = (
 				DEAADBCC2549C775001BA378 /* ViewController.xib in Resources */,
 				DEAADBC12549C5BD001BA378 /* Assets.xcassets in Resources */,
+				DECEE26725529C84005F387A /* PageTableViewCell.xib in Resources */,
 				DEAADBCE2549C8FD001BA378 /* LaunchScreen.xib in Resources */,
 				DECEE25F2552611E005F387A /* PageViewController.xib in Resources */,
 			);
@@ -184,6 +191,7 @@
 				DEAADBBC2549C5BC001BA378 /* ViewController.swift in Sources */,
 				DE4BE29225512C0A00ED4C98 /* PageSlideScrollView.swift in Sources */,
 				DECEE25B25524441005F387A /* UIViewController+PageSlide.swift in Sources */,
+				DECEE26625529C84005F387A /* PageTableViewCell.swift in Sources */,
 				DEAADBB82549C5BC001BA378 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
