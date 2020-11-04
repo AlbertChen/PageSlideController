@@ -8,36 +8,32 @@
 
 import UIKit
 
+@objcMembers
 public class PageSlideBarButton: UIButton {
     
     public var item: PageSlideBarItem? {
-        get {
-            return _item
-        }
-        set {
-            _item = newValue
-            configTitle()
+        didSet {
+            self.configTitle()
         }
     }
-    
-    private var _item: PageSlideBarItem?
     
     public convenience init(type: ButtonType, item: PageSlideBarItem) {
          self.init(type: type)
         
         self.item = item
-        self.addObserver(self, forKeyPath: "_item.title", options: [.new, .old], context: nil)
+        self.configTitle()
+        self.addObserver(self, forKeyPath: "item.title", options: [.new, .old], context: nil)
     }
     
     private func configTitle() {
-        self.setTitle(_item?.title, for: .normal)
-        self.setTitle(_item?.title, for: .selected)
-        self.setTitleColor(_item?.titleColor, for: .normal)
-        self.setTitleColor(_item?.selectedTitleColor, for: .selected)
+        self.setTitle(self.item?.title, for: .normal)
+        self.setTitle(self.item?.title, for: .selected)
+        self.setTitleColor(self.item?.titleColor, for: .normal)
+        self.setTitleColor(self.item?.selectedTitleColor, for: .selected)
     }
     
     deinit {
-        self.removeObserver(self, forKeyPath: "_item.title")
+        self.removeObserver(self, forKeyPath: "item.title")
     }
 
 }

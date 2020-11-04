@@ -23,7 +23,7 @@ public enum PageSlideBarLayoutStyle: Int {
 @objc
 public protocol PageSlideBarDataSource {
     @objc
-    optional func pageSlideBar(_ slideBar: PageSlideBar, buttonForItem item: PageSlideBarItem, atIndex index: NSNumber)
+    optional func pageSlideBar(_ slideBar: PageSlideBar, buttonForItem item: PageSlideBarItem, atIndex index: NSNumber) -> PageSlideBarButton
 }
 
 @objc
@@ -74,10 +74,10 @@ public class PageSlideBar: UIView {
         }
     }
     
-    public var scrollView: UIScrollView!
-    public var separatorView: UIView!
+    public private(set) var scrollView: UIScrollView!
+    public private(set) var separatorView: UIView!
     
-    public var indicatorView: UIView!
+    public private(set) var indicatorView: UIView!
     public var indicatorViewHeight: CGFloat {
         get {
             return self.indicatorView.frame.self.height
@@ -92,6 +92,10 @@ public class PageSlideBar: UIView {
     
     public var titleFont: UIFont? {
         didSet {
+            if self.scrollView == nil {
+                return
+            }
+            
             for view in self.scrollView.subviews {
                 let button = view as! PageSlideBarButton
                 if !button.isSelected || self.selectedTitleFont == nil {
@@ -177,7 +181,7 @@ public class PageSlideBar: UIView {
             indicatorView.backgroundColor = self.tintColor
             self.indicatorView = indicatorView
         }
-        self.addSubview(self.indicatorView)
+        self.scrollView.addSubview(self.indicatorView)
         
         self.setupLayoutConstraints()
     }
@@ -210,7 +214,7 @@ public class PageSlideBar: UIView {
         for i in 0..<self.items!.count {
             let item = self.items![i]
             var button: PageSlideBarButton? = nil
-//            button = self.dataSource?.pageSlideBar?(self, buttonForItem: item, atIndex: NSNumber(value: i))
+            button = self.dataSource?.pageSlideBar?(self, buttonForItem: item, atIndex: NSNumber(value: i))
             if button == nil {
                 button = PageSlideBarButton(type: .custom, item: item)
                 button?.backgroundColor = UIColor.clear
@@ -271,7 +275,7 @@ public class PageSlideBar: UIView {
             var preSelectedIndex = -1
             if let preSelectedItem = self.selectedItem {
                 if let firstIndex = self.items!.firstIndex(of: preSelectedItem) {
-                    preSelectedIndex = firstIndex.distance(to: 0)
+                    preSelectedIndex = firstIndex
                 }
             }
             if preSelectedIndex >= 0 && preSelectedIndex < self.items!.count {
@@ -285,7 +289,7 @@ public class PageSlideBar: UIView {
             var selectedIndex = -1
             if selectedItem != nil {
                 if let firstIndex = self.items!.firstIndex(of: selectedItem!) {
-                    selectedIndex = firstIndex.distance(to: 0)
+                    selectedIndex = firstIndex
                 }
             }
             if selectedIndex >= 0 && selectedIndex < self.items!.count {

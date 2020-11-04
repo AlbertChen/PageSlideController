@@ -8,6 +8,7 @@
 
 import UIKit
 
+@objcMembers
 public class PageSlideBarItem: NSObject {
     
     public var title: String?
@@ -23,7 +24,7 @@ public class PageSlideBarItem: NSObject {
     
     private var _titleColor: UIColor?
     
-    public init(title: String, titleColor: UIColor?, selectedTitleColor: UIColor?) {
+    public init(title: String?, titleColor: UIColor?, selectedTitleColor: UIColor?) {
         super.init()
         self.title = title
         self.titleColor = titleColor
