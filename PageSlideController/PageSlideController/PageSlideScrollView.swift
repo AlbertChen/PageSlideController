@@ -10,7 +10,7 @@ import UIKit
 
 public class PageSlideScrollView: UIScrollView, UIGestureRecognizerDelegate {
     
-    internal var otherGestureRecognizers: [UIGestureRecognizer]?
+    public var otherGestureRecognizers: [UIGestureRecognizer]?
     
     public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
         if let otherGestureRecognizers = otherGestureRecognizers, otherGestureRecognizers.contains(otherGestureRecognizer) {

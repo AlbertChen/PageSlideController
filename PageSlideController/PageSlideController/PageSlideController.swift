@@ -127,13 +127,13 @@ open class PageSlideController: UIViewController, UIScrollViewDelegate, PageSlid
     open override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupSubView()
+        setupSubview()
         observeScrollViewContentOffset()
         updateContentSubviews()
         updateContentSubviews(selectedIndex: selectedIndex, changeOffset: true)
     }
     
-    private func setupSubView() {
+    private func setupSubview() {
         if self.scrollView == nil {
             let scrollView = PageSlideScrollView(frame: self.view.bounds)
             scrollView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
